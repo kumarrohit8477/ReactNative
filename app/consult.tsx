@@ -3,7 +3,6 @@ import {
   View,
   Text,
   StyleSheet,
-  SafeAreaView,
   ScrollView,
   TouchableOpacity,
   TextInput,
@@ -12,7 +11,7 @@ import {
   Alert,
   FlatList,
 } from 'react-native';
-
+import {SafeAreaView} from 'react-native-safe-area-context';
 // --- Interfaces ---
 interface TimeSlot {
   id: string;

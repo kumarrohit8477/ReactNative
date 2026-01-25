@@ -3,7 +3,6 @@ import {
   View,
   Text,
   StyleSheet,
-  SafeAreaView,
   ScrollView,
   Image,
   TouchableOpacity,
@@ -12,6 +11,7 @@ import {
   Platform,
   StatusBar,
 } from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 // --- TypeScript Interfaces ---
 interface MenuItem {

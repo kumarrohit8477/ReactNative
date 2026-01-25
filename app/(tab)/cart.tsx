@@ -3,7 +3,6 @@ import {
   View,
   Text,
   StyleSheet,
-  SafeAreaView,
   FlatList,
   Image,
   TouchableOpacity,
@@ -11,7 +10,7 @@ import {
   StatusBar,
   Platform,
 } from 'react-native';
-
+import {SafeAreaView} from 'react-native-safe-area-context';
 // --- Interfaces ---
 interface CartItem {
   id: string;

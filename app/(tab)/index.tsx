@@ -3,7 +3,6 @@ import {
   View,
   Text,
   StyleSheet,
-  SafeAreaView,
   ScrollView,
   Image,
   TouchableOpacity,
@@ -12,7 +11,11 @@ import {
   StatusBar,
   Platform,
 } from 'react-native';
-
+import { SafeAreaView } from 'react-native-safe-area-context';
+import ServiceBox from "../../components/servicebox";
+import CardContainer from '@/components/containercard';
+import Acontainer from '@/components/acontainer';
+import Bookservive from '@/components/bookservices';
 // --- TypeScript Interfaces ---
 interface Category {
   id: string;
@@ -79,25 +82,26 @@ const HomePage = () => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#ddedf0" />
-      
+
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
-        
+
+
+
+
+
         {/* 1. Header Section */}
         <View style={styles.header}>
           <View>
             <Text style={styles.greetingText}>Welcome to,</Text>
             <Text style={styles.userName}>KarigarWork</Text>
           </View>
-          <Image
-            source={{ uri: 'https://randomuser.me/api/portraits/men/32.jpg' }}
-            style={styles.profileImage}
-          />
+          <View><Image source={require('@/assets/images/rohit.jpg')} style={styles.profileImage} /></View>
         </View>
 
         {/* 2. Search Bar */}
         <View style={styles.searchContainer}>
           <TextInput
-            placeholder="Search for products..."
+            placeholder="Search for services..."
             style={styles.searchInput}
             placeholderTextColor="#888888"
           />
@@ -124,6 +128,13 @@ const HomePage = () => {
             </TouchableOpacity>
           </View>
 
+
+
+          <Acontainer />
+          <Bookservive />
+
+
+
           {FEATURED_ITEMS.map((item) => (
             <TouchableOpacity key={item.id} style={styles.card}>
               <Image source={{ uri: item.image }} style={styles.cardImage} />
@@ -135,6 +146,20 @@ const HomePage = () => {
           ))}
         </View>
 
+        <View>
+          <ServiceBox serviceName="Home Improvement Services" items={["Item 1", "Item 2", "Item 3", "Item 4", "Item 3", "Item 4"]} />
+          <ServiceBox serviceName="Home Improvement Services" items={["Item 1", "Item 2", "Item 3", "Item 4", "Item 3", "Item 4"]} />
+        </View>
+
+
+
+        
+        <CardContainer />
+
+
+
+
+
       </ScrollView>
     </SafeAreaView>
   );
@@ -145,7 +170,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#d1ebeb',
     // The Safe Area fix for Android we discussed:
-      paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   scrollContent: {
     paddingBottom: 20,
