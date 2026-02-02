@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   View,
   FlatList,
@@ -11,7 +11,6 @@ import {
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
-// 1. Define specific types for better safety
 interface Slide {
   id: string;
   image: any;
@@ -25,19 +24,35 @@ const SLIDES: Slide[] = [
 
 const Slider: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const flatListRef = useRef<FlatList<Slide>>(null);
 
-  // 2. Optimization: Use onViewableItemsChanged for accurate index tracking
-  // This updates the dot exactly when the slide snaps into place
-  const onViewableItemsChanged = useRef(({ viewableItems }: { viewableItems: ViewToken[] }) => {
-    if (viewableItems.length > 0 && viewableItems[0].index !== null) {
-      setCurrentIndex(viewableItems[0].index);
+  // 🔹 Track visible item (for dots)
+  const onViewableItemsChanged = useRef(
+    ({ viewableItems }: { viewableItems: ViewToken[] }) => {
+      if (viewableItems.length > 0 && viewableItems[0].index !== null) {
+        setCurrentIndex(viewableItems[0].index);
+      }
     }
-  }).current;
+  ).current;
 
-  // Configuration for how much of the item needs to be visible to be "active"
   const viewabilityConfig = useRef({
     itemVisiblePercentThreshold: 50,
   }).current;
+
+  // 🔹 AUTO SCROLL LOGIC
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const nextIndex =
+        currentIndex === SLIDES.length - 1 ? 0 : currentIndex + 1;
+
+      flatListRef.current?.scrollToIndex({
+        index: nextIndex,
+        animated: true,
+      });
+    }, 2500); // ⏱️ 3 seconds
+
+    return () => clearInterval(interval);
+  }, [currentIndex]);
 
   const renderItem: ListRenderItem<Slide> = ({ item }) => (
     <View style={styles.slideItem}>
@@ -47,18 +62,18 @@ const Slider: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      {/* Slider */}
       <FlatList
+        ref={flatListRef}
         data={SLIDES}
         keyExtractor={(item) => item.id}
         renderItem={renderItem}
         horizontal
         pagingEnabled
         showsHorizontalScrollIndicator={false}
-        bounces={false} // Prevents overscrolling visual glitch
+        bounces={false}
         onViewableItemsChanged={onViewableItemsChanged}
         viewabilityConfig={viewabilityConfig}
-        scrollEventThrottle={32} // Optimizes scroll event frequency
+        scrollEventThrottle={32}
       />
 
       {/* Dots */}
@@ -81,19 +96,16 @@ export default Slider;
 
 const styles = StyleSheet.create({
   container: {
-    // Optional: Add height constraints if needed
-    paddingVertical: 20,
+    paddingVertical: 10,
+    marginTop: 20,
   },
   slideItem: {
-    // 3. CRITICAL: The item container must be the same width as the screen
-    // for pagingEnabled to work correctly.
     width: SCREEN_WIDTH,
     justifyContent: 'center',
     alignItems: 'center',
   },
   image: {
-    // We make the image slightly smaller than screen width for a card look
-    width: SCREEN_WIDTH - 40, 
+    width: SCREEN_WIDTH - 40,
     height: 200,
     borderRadius: 12,
     resizeMode: 'cover',
@@ -109,12 +121,11 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     marginHorizontal: 4,
   },
-  // Separating active/inactive styles makes logic clearer
   activeDot: {
-    backgroundColor: '#333', // Darker for active
-    width: 20, // Optional: Elongate the active dot for a modern look
+    backgroundColor: '#333',
+    width: 20,
   },
   inactiveDot: {
-    backgroundColor: '#ccc', // Lighter for inactive
+    backgroundColor: '#ccc',
   },
 });

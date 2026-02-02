@@ -15,32 +15,31 @@ interface CardProps {
   title: string;
   image: ImageSourcePropType;
   onPress?: () => void;
-  /** Optional style override for the outer container (e.g., margins, width) */
+  /** Optional style override (margin, width, etc.) */
   style?: StyleProp<ViewStyle>;
 }
 
 const Card: React.FC<CardProps> = ({ title, image, onPress, style }) => {
   return (
-    <View style={[styles.shadowContainer, style]}>
+    <View style={[styles.shadowWrapper, style]}>
       <Pressable
         onPress={onPress}
-        style={({ pressed }) => [
-          styles.innerContainer,
-          // visual feedback for iOS
-          pressed && Platform.OS === 'ios' && styles.pressed,
-        ]}
-        android_ripple={{ color: '#dddddd' }}
+        android_ripple={{ color: '#e6e6e6' }}
         accessibilityRole="button"
-        accessibilityLabel={`View details for ${title}`}
+        accessibilityLabel={`Open ${title}`}
+        style={({ pressed }) => [
+          styles.card,
+          pressed && styles.pressed,
+        ]}
       >
-        {/* Image Section */}
-        <View style={styles.imageWrapper}>
+        {/* Image */}
+        <View style={styles.imageContainer}>
           <Image source={image} style={styles.image} resizeMode="cover" />
         </View>
 
-        {/* Content Section */}
-        <View style={styles.contentContainer}>
-          <Text style={styles.titleText} numberOfLines={1}>
+        {/* Title */}
+        <View style={styles.titleContainer}>
+          <Text style={styles.title} numberOfLines={1}>
             {title}
           </Text>
         </View>
@@ -52,56 +51,53 @@ const Card: React.FC<CardProps> = ({ title, image, onPress, style }) => {
 export default memo(Card);
 
 const styles = StyleSheet.create({
-  // 1. Outer container handles Dimensions & Shadows
-  shadowContainer: {
+  /* Outer wrapper only for shadow */
+  shadowWrapper: {
     width: 115,
-    height: 125,
-    marginTop: 12,
-    backgroundColor: 'transparent', // Important for shadow visibility
-
+    height: 120,
+    backgroundColor: 'transparent',
     // iOS shadow
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.15,
-    shadowRadius: 4,
-
-    // Android shadow
-    elevation: 5,
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.12,
+    shadowRadius: 6,
+    // Android
+    elevation: 4,
+    
   },
 
-  // 2. Inner container handles Border Radius & Overflow
-  innerContainer: {
+  /* Main card */
+  card: {
     flex: 1,
-    borderRadius: 12,
-    backgroundColor: '#fff',
-    overflow: 'hidden', // Clips the image to the border radius
+    overflow: 'hidden',
   },
 
-  // iOS Press Effect
+  /* Press feedback (iOS + Android fallback) */
   pressed: {
-    opacity: 0.75,
+    opacity: Platform.OS === 'ios' ? 0.75 : 1,
   },
 
-  imageWrapper: {
-    flex: 1, // Takes up remaining space not used by contentContainer
+  imageContainer: {
+    flex: 1,
+    
   },
 
   image: {
     width: '100%',
-    height: '100%',
+    height: 90,
+    borderRadius: 10,
+    overflow: 'hidden',
   },
 
-  contentContainer: {
-    height: 36, // Fixed height prevents layout jumps if text is empty
-    backgroundColor: 'rgba(91, 147, 140, 0.9)', // Slightly higher opacity for readability
-    paddingHorizontal: 10,
-    justifyContent: 'center', // Vertically center text
+  titleContainer: {
+    height: 30,
+    justifyContent: 'center',
+    paddingHorizontal: 6,
   },
 
-  titleText: {
-    color: '#fff',
+  title: {
     fontSize: 13,
     fontWeight: '600',
-    textAlign: 'left',
+    letterSpacing: 0.3,
   },
 });

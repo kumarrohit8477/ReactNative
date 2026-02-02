@@ -20,7 +20,6 @@ interface CartItem {
   image: string;
   quantity: number;
 }
-
 // --- Dummy Data ---
 const INITIAL_ITEMS: CartItem[] = [
   {
@@ -28,7 +27,7 @@ const INITIAL_ITEMS: CartItem[] = [
     name: 'Modern Lamp',
     category: 'Lighting',
     price: 45.00,
-    image: 'https://images.unsplash.com/photo-1507473888900-52e1adad5481?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+    image: '@assets/images/bed.png',
     quantity: 1,
   },
   {
@@ -48,11 +47,9 @@ const INITIAL_ITEMS: CartItem[] = [
     quantity: 1,
   },
 ];
-
 const Cart = () => {
   const [cartItems, setCartItems] = useState<CartItem[]>(INITIAL_ITEMS);
   const [totals, setTotals] = useState({ subtotal: 0, tax: 0, total: 0 });
-
   // Update totals whenever cartItems change
   useEffect(() => {
     const subtotal = cartItems.reduce(
@@ -68,7 +65,6 @@ const Cart = () => {
       total: parseFloat(total.toFixed(2)),
     });
   }, [cartItems]);
-
   // Handlers
   const incrementQuantity = (id: string) => {
     setCartItems((prevItems) =>
@@ -77,7 +73,6 @@ const Cart = () => {
       )
     );
   };
-
   const decrementQuantity = (id: string) => {
     setCartItems((prevItems) =>
       prevItems.map((item) => {
@@ -90,7 +85,6 @@ const Cart = () => {
       })
     );
   };
-
   const removeItem = (id: string) => {
     Alert.alert('Remove Item', 'Are you sure you want to remove this item?', [
       { text: 'Cancel', style: 'cancel' },
@@ -101,7 +95,6 @@ const Cart = () => {
       },
     ]);
   };
-
   // Render Single Cart Item
   const renderItem = ({ item }: { item: CartItem }) => (
     <View style={styles.cartItem}>
