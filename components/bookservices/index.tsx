@@ -20,6 +20,8 @@ const SLIDES: Slide[] = [
   { id: '1', image: require('@/assets/images/acs.png') },
   { id: '2', image: require('@/assets/images/ryf.png') },
   { id: '3', image: require('@/assets/images/sybd.png') },
+  { id: '4', image: require('@/assets/images/roi.png') },
+  { id: '5', image: require('@/assets/images/ikc.png') },
 ];
 
 const Slider: React.FC = () => {

@@ -7,16 +7,20 @@ import {
   Image,
   InteractionManager,
   FlatList,
-  Dimensions,
 } from 'react-native';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { Service, ServiceOption } from '@/data/services';
 
 /* ---------- TYPES ---------- */
 
-interface Props {
+interface ModalProps {
   service: Service;
   onClose: () => void;
+}
+
+interface OptionCardProps {
+  option: ServiceOption;
+  onPress: (option: ServiceOption) => void;
 }
 
 type RootStackParamList = Record<
@@ -24,32 +28,26 @@ type RootStackParamList = Record<
   { serviceName: string; optionSelected: string }
 >;
 
-const SCREEN_WIDTH = Dimensions.get('window').width;
-
 /* ---------- OPTION CARD ---------- */
 
-const OptionCard = memo(({ 
-  option, 
-  onPress 
-}: { 
-  option: ServiceOption; 
-  onPress: (opt: ServiceOption) => void; 
-}) => {
+const OptionCard = memo(({ option, onPress }: OptionCardProps) => {
   return (
-    <Pressable
-      onPress={() => onPress(option)}
-      accessibilityRole="button"
-      accessibilityLabel={`Select ${option.title}`}
-      style={({ pressed }) => [
-        styles.card,
-        pressed && styles.cardPressed,
-      ]}
-    >
-      <Image source={option.image} style={styles.image} />
-      <Text style={styles.text} numberOfLines={2}>
+    <View style={styles.optionWrapper}>
+      {/* Title ABOVE the card */}
+      <Text style={styles.optionTitle} numberOfLines={1}>
         {option.title}
       </Text>
-    </Pressable>
+
+      <Pressable
+        onPress={() => onPress(option)}
+        style={({ pressed }) => [
+          styles.card,
+          pressed && styles.cardPressed,
+        ]}
+      >
+        <Image source={option.image} style={styles.image} />
+      </Pressable>
+    </View>
   );
 });
 
@@ -57,14 +55,13 @@ OptionCard.displayName = 'OptionCard';
 
 /* ---------- MAIN COMPONENT ---------- */
 
-const IconModal: React.FC<Props> = ({ service, onClose }) => {
+const IconModal: React.FC<ModalProps> = ({ service, onClose }) => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const handlePress = useCallback(
     (option: ServiceOption) => {
       if (!option.route) return;
 
-      // Close modal first for a smoother transition
       onClose();
 
       InteractionManager.runAfterInteractions(() => {
@@ -81,22 +78,18 @@ const IconModal: React.FC<Props> = ({ service, onClose }) => {
 
   return (
     <View style={styles.backdrop}>
-      {/* Dismiss backdrop */}
-      <Pressable 
-        style={StyleSheet.absoluteFill} 
-        onPress={onClose} 
+      {/* Backdrop dismiss */}
+      <Pressable
+        style={StyleSheet.absoluteFill}
+        onPress={onClose}
         accessibilityLabel="Close modal"
       />
 
       <View style={styles.centeredCard}>
-        {/* Header Section */}
+        {/* Header */}
         <View style={styles.header}>
           <Text style={styles.title}>{service.name}</Text>
-          <Pressable
-            style={styles.closeButton}
-            onPress={onClose}
-            hitSlop={15}
-          >
+          <Pressable style={styles.closeButton} onPress={onClose} hitSlop={15}>
             <Image
               source={require('@/assets/icons/back.png')}
               style={styles.closeButtonImage}
@@ -107,7 +100,7 @@ const IconModal: React.FC<Props> = ({ service, onClose }) => {
         {/* Options Grid */}
         <FlatList
           data={service.options}
-          keyExtractor={(item) => item.id.toString()}
+          keyExtractor={(item) => item.id}
           numColumns={3}
           columnWrapperStyle={styles.row}
           renderItem={({ item }) => (
@@ -126,81 +119,94 @@ export default memo(IconModal);
 /* ---------- STYLES ---------- */
 
 const styles = StyleSheet.create({
+  /* BACKDROP */
   backdrop: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0,0,0,0.75)',
+    backgroundColor: 'rgba(0,0,0,0.7)',
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
   },
+
+  /* MODAL CARD */
   centeredCard: {
     width: '100%',
     maxWidth: 420,
-    maxHeight: '80%', // Prevents overflow on small screens
-    backgroundColor: '#c47c7c',
-    borderRadius: 28,
-    paddingTop: 20,
-    paddingBottom: 10,
-    paddingHorizontal: 12,
-    elevation: 20,
+    backgroundColor: '#f2eded',
+    borderRadius: 24,
+    paddingTop: 16,
+    paddingBottom: 12,
+    paddingHorizontal: 14,
+    elevation: 16,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.3,
-    shadowRadius: 20,
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.25,
+    shadowRadius: 16,
   },
+
+  /* HEADER */
   header: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 20,
-    paddingHorizontal: 8,
+    justifyContent: 'space-between',
+    marginBottom: 16,
   },
-  closeButton: {
-    backgroundColor: '#fff',
-    padding: 10,
-    borderRadius: 25,
-  },
-  closeButtonImage: {
-    width: 12,
-    height: 12,
-    tintColor: '#333',
-  },
+
   title: {
     fontSize: 22,
-    fontWeight: '800',
-    color: '#fff', // Changed to white for better contrast on #c47c7c
+    fontWeight: '600',
+    color: '#3e2d2d',
   },
+
+  closeButton: {
+    backgroundColor: '#FFFFFF',
+    padding: 8,
+    borderRadius: 20,
+    elevation: 3,
+  },
+
+  closeButtonImage: {
+    width: 14,
+    height: 14,
+    tintColor: '#333',
+  },
+
+  /* LIST */
   listContent: {
-    paddingBottom: 10,
+    paddingBottom: 16,
   },
+
   row: {
-    justifyContent: 'flex-start',
-    gap: 8,
-    marginBottom: 8,
+    justifyContent: 'space-between',
+    marginBottom: 12,
   },
+
+  /* OPTION CARD */
+  optionWrapper: {
+    flex: 1,
+    maxWidth: '31%',
+  },
+
+  optionTitle: {
+    fontSize: 14,
+    fontWeight: '500',
+    color: '#374151',
+    marginBottom: 4,
+  },
+
   card: {
-    flex: 1/3, // Forces 3 columns exactly
-    aspectRatio: 0.9,
-    backgroundColor: '#9dbbd8',
-    borderWidth: 1,
-    borderColor: '#e5e7eb',
-    alignItems: 'center',
-    justifyContent: 'center',
+    height: 85,
+    borderRadius: 16,
+    overflow: 'hidden',
   },
+
   cardPressed: {
     transform: [{ scale: 0.95 }],
-    backgroundColor: '#f3f4f6',
   },
+
   image: {
     width: '100%',
-    height: '60%',
-    resizeMode: 'contain',
-    marginBottom: 5,
-  },
-  text: {
-    fontSize: 11,
-    fontWeight: '700',
-    color: '#374151',
-    textAlign: 'center',
+    height: '100%',
+    resizeMode: 'cover',
   },
 });
