@@ -8,11 +8,13 @@ import {
   ListRenderItem,
 } from 'react-native';
 import ServiceCard from './ServiceCard';
+import { router } from 'expo-router';
 // ---------------- TYPES ----------------
 interface ServiceItem {
   id: string;
-  image: ImageSourcePropType; // Fixed type from 'any'
+  image: ImageSourcePropType;
   serviceName: string;
+  route: string; // 👈 ADD THIS
 }
 // ---------------- DATA ----------------
 // Ideally, move this to a separate constants file
@@ -21,49 +23,56 @@ const SERVICES_DATA: ServiceItem[] = [
     id: '1',
     image: require('@/assets/images/bathroom.png'),
     serviceName: 'Bathroom & Kitchen Cleaning',
+    route: '/cleaning/bathroom-kitchen',
   },
   {
     id: '2',
     image: require('@/assets/images/sofa.png'),
     serviceName: 'Sofa & Carpet Cleaning',
+    route: '/cleaning/sofa-carpet',
   },
   {
     id: '3',
     image: require('@/assets/images/homeclean.jpg'),
     serviceName: 'Full Home Deep Cleaning',
+    route: '/cleaning/full-home',
   },
   {
     id: '4',
     image: require('@/assets/images/wtc.jpg'),
     serviceName: 'Water Tank Cleaning',
+    route: '/cleaning/water-tank',
   },
   {
     id: '5',
     image: require('@/assets/images/pc.jpg'),
     serviceName: 'Pest Control',
+    route: '/cleaning/pest-control',
   },
   {
     id: '6',
     image: require('@/assets/images/mosquitonet.png'),
     serviceName: 'Mosquito Net',
+    route: '/cleaning/mosquito-net',
   },
 ];
+
 // ---------------- COMPONENT ----------------
 const CleanNpest = () => {
   // 1. Stable Callback: This ensures 'onPress' prop doesn't change on every render
-  const handleServicePress = useCallback((id: string) => {
-    console.log(`Service selected: ${id}`);
-    // Navigation logic goes here
+  const handleServicePress = useCallback((route: string) => {
+    router.push(route);
   }, []);
+
   // 2. Render Item: Defined properly to use the stable callback
-  const renderItem: ListRenderItem<ServiceItem> = ({ item }) => (
-    <ServiceCard
-      id={item.id}
-      image={item.image}
-      serviceName={item.serviceName}
-      onPress={handleServicePress}
-    />
-  );
+const renderItem: ListRenderItem<ServiceItem> = ({ item }) => (
+  <ServiceCard
+    id={item.route}          // 👈 pass route instead of id
+    image={item.image}
+    serviceName={item.serviceName}
+    onPress={handleServicePress}
+  />
+);
   return (
     <View style={styles.container}>
       <Text style={styles.headerTitle}>Cleaning & Pest Control</Text>

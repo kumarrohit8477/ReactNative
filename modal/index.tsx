@@ -5,10 +5,9 @@ import {
   Pressable,
   StyleSheet,
   Image,
-  InteractionManager,
   FlatList,
 } from 'react-native';
-import { useNavigation, NavigationProp } from '@react-navigation/native';
+import { router } from 'expo-router';
 import { Service, ServiceOption } from '@/data/services';
 
 /* ---------- TYPES ---------- */
@@ -23,17 +22,11 @@ interface OptionCardProps {
   onPress: (option: ServiceOption) => void;
 }
 
-type RootStackParamList = Record<
-  string,
-  { serviceName: string; optionSelected: string }
->;
-
 /* ---------- OPTION CARD ---------- */
 
 const OptionCard = memo(({ option, onPress }: OptionCardProps) => {
   return (
     <View style={styles.optionWrapper}>
-      {/* Title ABOVE the card */}
       <Text style={styles.optionTitle} numberOfLines={1}>
         {option.title}
       </Text>
@@ -53,43 +46,48 @@ const OptionCard = memo(({ option, onPress }: OptionCardProps) => {
 
 OptionCard.displayName = 'OptionCard';
 
-/* ---------- MAIN COMPONENT ---------- */
+/* ---------- MAIN MODAL ---------- */
 
 const IconModal: React.FC<ModalProps> = ({ service, onClose }) => {
-  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-
   const handlePress = useCallback(
     (option: ServiceOption) => {
       if (!option.route) return;
 
+      // Close modal first
       onClose();
 
-      InteractionManager.runAfterInteractions(() => {
-        navigation.navigate(option.route!, {
-          serviceName: service.name,
-          optionSelected: option.title,
+      // Navigate after modal closes
+      requestAnimationFrame(() => {
+        router.push({
+          pathname: option.route,
+          params: {
+            serviceName: service.name,
+            optionSelected: option.title,
+          },
         });
       });
     },
-    [navigation, onClose, service.name]
+    [onClose, service.name]
   );
 
   if (!service) return null;
 
   return (
     <View style={styles.backdrop}>
-      {/* Backdrop dismiss */}
+      {/* Backdrop */}
       <Pressable
         style={StyleSheet.absoluteFill}
         onPress={onClose}
         accessibilityLabel="Close modal"
       />
 
+      {/* Modal Card */}
       <View style={styles.centeredCard}>
         {/* Header */}
         <View style={styles.header}>
           <Text style={styles.title}>{service.name}</Text>
-          <Pressable style={styles.closeButton} onPress={onClose} hitSlop={15}>
+
+          <Pressable onPress={onClose} hitSlop={15} style={styles.closeButton}>
             <Image
               source={require('@/assets/icons/back.png')}
               style={styles.closeButtonImage}
@@ -97,17 +95,17 @@ const IconModal: React.FC<ModalProps> = ({ service, onClose }) => {
           </Pressable>
         </View>
 
-        {/* Options Grid */}
+        {/* Options */}
         <FlatList
           data={service.options}
           keyExtractor={(item) => item.id}
           numColumns={3}
           columnWrapperStyle={styles.row}
+          contentContainerStyle={styles.listContent}
+          showsVerticalScrollIndicator={false}
           renderItem={({ item }) => (
             <OptionCard option={item} onPress={handlePress} />
           )}
-          contentContainerStyle={styles.listContent}
-          showsVerticalScrollIndicator={false}
         />
       </View>
     </View>
@@ -115,7 +113,6 @@ const IconModal: React.FC<ModalProps> = ({ service, onClose }) => {
 };
 
 export default memo(IconModal);
-
 /* ---------- STYLES ---------- */
 
 const styles = StyleSheet.create({

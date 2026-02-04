@@ -1,9 +1,9 @@
 import React, { memo } from 'react';
 import {
   StyleSheet,
-  ScrollView,
   StatusBar,
   Platform,
+  FlatList,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -28,19 +28,24 @@ const HomePage = () => {
 
       <Header />
 
-      <ScrollView
+      <FlatList
+        data={[]} // 👈 empty because content is static
+        keyExtractor={() => 'static'}
         showsVerticalScrollIndicator={false}
+        renderItem={null}
+        ListHeaderComponent={
+          <>
+            <Acontainer />
+            <Bookservice />
+            <MostBookingServices />
+            <HomeImprovementServices /> {/* FlatList is SAFE here */}
+            <ServiceSection />
+            <CleanNpest />
+            <Renovation />
+          </>
+        }
         contentContainerStyle={styles.scrollContent}
-      >
-        <Acontainer />
-        <Bookservice />
-        <MostBookingServices />
-        <HomeImprovementServices />
-        <ServiceSection />
-        <CleanNpest />
-        <Renovation />
-        
-      </ScrollView>
+      />
     </SafeAreaView>
   );
 };
@@ -55,6 +60,6 @@ const styles = StyleSheet.create({
     paddingTop: 30,
   },
   scrollContent: {
-    paddingBottom: 5,
+    paddingBottom: 10,
   },
 });

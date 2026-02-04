@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, Modal } from 'react-native';
 import { SERVICES, Service } from '@/data/services';
-import IconModal from '@/Modals/IconModal';
+import IconModal from '@/modal';
 
 const Midbox: React.FC = () => {
   const [modalVisible, setModalVisible] = useState(false);

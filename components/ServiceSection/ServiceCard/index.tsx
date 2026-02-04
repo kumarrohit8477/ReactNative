@@ -12,11 +12,12 @@ import {
 const { width } = Dimensions.get('window');
 
 interface ServiceCardProps {
-  id: string; // Added ID so we can pass it back
+  id: string; // now this is ROUTE
   image: ImageSourcePropType;
   serviceName: string;
-  onPress: (id: string) => void; // Callback returns the ID
+  onPress: (route: string) => void;
 }
+
 
 const ServiceCard: React.FC<ServiceCardProps> = ({
   id,
@@ -25,7 +26,8 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   onPress,
 }) => {
   // dedicated handler to prevent inline arrow functions in the parent
-  const handlePress = () => onPress(id);
+const handlePress = () => onPress(id);
+
 
   return (
     <TouchableOpacity

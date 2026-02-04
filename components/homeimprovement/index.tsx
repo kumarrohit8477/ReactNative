@@ -8,7 +8,7 @@ import {
   ImageSourcePropType,
   useWindowDimensions,
 } from 'react-native';
-import { useNavigation, NavigationProp } from '@react-navigation/native';
+import { router } from 'expo-router';
 import Card from '../card';
 
 // ---------------- TYPES ----------------
@@ -16,22 +16,8 @@ interface ServiceItem {
   id: string;
   title: string;
   image: ImageSourcePropType;
-  route: keyof RootStackParamList;
+  route: string; // Expo Router path
 }
-
-type RootStackParamList = {
-  Carpenter: undefined;
-  Plumber: undefined;
-  Electrician: undefined;
-  PaintingnWaterproofing: undefined;
-  Mason: undefined;
-  FlooringNTiling: undefined;
-  Aluminiumwork: undefined;
-  SteelNWelding: undefined;
-  PVCPanel: undefined;
-};
-
-type RootNavigation = NavigationProp<RootStackParamList>;
 
 // ---------------- DATA ----------------
 const SERVICES: ServiceItem[] = [
@@ -39,55 +25,55 @@ const SERVICES: ServiceItem[] = [
     id: '1',
     title: 'Carpenter',
     image: require('@/assets/images/carpenter.png'),
-    route: 'Carpenter',
+    route: '/service/carpenter',
   },
   {
     id: '2',
     title: 'Plumber',
     image: require('@/assets/images/plumber.png'),
-    route: 'Plumber',
+    route: '/service/plumber',
   },
   {
     id: '3',
     title: 'Electrician',
     image: require('@/assets/images/electrician.png'),
-    route: 'Electrician',
+    route: '/service/electrician',
   },
   {
     id: '4',
     title: 'Painting & Waterproofing',
     image: require('@/assets/images/painter.png'),
-    route: 'PaintingnWaterproofing',
+    route: '/service/painter',
   },
   {
     id: '5',
     title: 'Mason',
     image: require('@/assets/images/mason.png'),
-    route: 'Mason',
+    route: '/service/mason',
   },
   {
     id: '6',
     title: 'Flooring & Tiling',
     image: require('@/assets/images/tilesetter.png'),
-    route: 'FlooringNTiling',
+    route: '/service/flooring',
   },
   {
     id: '7',
     title: 'Aluminium Work',
     image: require('@/assets/images/cabinate.png'),
-    route: 'Aluminiumwork',
+    route: '/service/aluminium',
   },
   {
     id: '8',
     title: 'Steel & Welding',
     image: require('@/assets/images/railing.jpg'),
-    route: 'SteelNWelding',
+    route: '/service/steel',
   },
   {
     id: '9',
     title: 'PVC Panel',
     image: require('@/assets/images/pvc.jpg'),
-    route: 'PVCPanel',
+    route: '/service/pvc',
   },
 ];
 
@@ -97,7 +83,6 @@ const CARD_GAP = 12;
 
 // ---------------- COMPONENT ----------------
 const ServicesGrid: React.FC = () => {
-  const navigation = useNavigation<RootNavigation>();
   const { width } = useWindowDimensions();
 
   const CARD_WIDTH =
@@ -109,10 +94,10 @@ const ServicesGrid: React.FC = () => {
         title={item.title}
         image={item.image}
         style={{ width: CARD_WIDTH }}
-        onPress={() => navigation.navigate(item.route)}
+        onPress={() => router.push(item.route)}
       />
     ),
-    [navigation, CARD_WIDTH]
+    [CARD_WIDTH]
   );
 
   return (
@@ -127,8 +112,6 @@ const ServicesGrid: React.FC = () => {
         columnWrapperStyle={styles.row}
         contentContainerStyle={styles.listContent}
         showsVerticalScrollIndicator={false}
-        removeClippedSubviews
-        initialNumToRender={6}
       />
     </View>
   );
