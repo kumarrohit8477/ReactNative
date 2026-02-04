@@ -12,7 +12,7 @@ import Header from '@/components/Header';
 import Acontainer from '@/components/acontainer';
 import Bookservice from '@/components/bookservices';
 import MostBookingServices from '@/components/mostbookedservice';
-import HomeImprovementServices from '@/components/aa';
+import HomeImprovementServices from '@/components/homeimprovement';
 import ServiceSection from '@/components/ServiceSection';
 import CleanNpest from '@/components/ServiceSection/clean&pest';
 import Renovation from '@/components/ServiceSection/renovation';

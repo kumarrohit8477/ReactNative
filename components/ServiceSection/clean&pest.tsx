@@ -29,7 +29,7 @@ const SERVICES_DATA: ServiceItem[] = [
   },
   {
     id: '3',
-    image: require('@/assets/images/refrigerator.png'),
+    image: require('@/assets/images/homeclean.jpg'),
     serviceName: 'Full Home Deep Cleaning',
   },
   {
@@ -44,7 +44,7 @@ const SERVICES_DATA: ServiceItem[] = [
   },
   {
     id: '6',
-    image: require('@/assets/images/pc.jpg'),
+    image: require('@/assets/images/mosquitonet.png'),
     serviceName: 'Mosquito Net',
   },
 ];

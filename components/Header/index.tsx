@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TextInput,
   Animated,
+  Image,
 } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 
@@ -34,13 +35,18 @@ const Header = () => {
           duration: 300,
           useNativeDriver: true,
         }),
+        Animated.timing(translateY, {
+          toValue: 0,
+          duration: 0,
+          useNativeDriver: true,
+        }),
       ]).start()
 
       setShowBrandName(prev => !prev)
     }, 3000)
 
     return () => clearInterval(interval)
-  }, );
+  }, [])
 
   return (
     <>
@@ -54,7 +60,7 @@ const Header = () => {
               styles.dynamicText,
               {
                 opacity,
-             
+                transform: [{ translateY }],
               },
             ]}
           >
@@ -63,7 +69,10 @@ const Header = () => {
         </View>
 
         <View style={styles.locationContainer}>
-          <Ionicons name="location-outline" size={18} color="#7a6f6f" />
+          <Image
+            source={require('@/assets/icons/location.png')}
+            style={styles.locationIcon}
+          />
           <Text style={styles.locationText}>{city}</Text>
         </View>
       </View>
@@ -85,8 +94,7 @@ const Header = () => {
   )
 }
 
-export default Header;
-
+export default Header
 const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
@@ -119,6 +127,13 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 20,
+  },
+
+  locationIcon: {
+    width: 16,
+    height: 16,
+    tintColor: '#333',
+    resizeMode: 'contain',
   },
 
   locationText: {

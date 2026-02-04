@@ -19,17 +19,17 @@ interface ServiceItem {
 const SERVICES_DATA: ServiceItem[] = [
   {
     id: '1',
-    image: require('@/assets/images/kitchen.png'),
+    image: require('@/assets/images/homerenovation.jpeg'),
     serviceName: 'Home Renovation',
   },
   {
     id: '2',
-    image: require('@/assets/images/kitchen.png'),
+    image: require('@/assets/images/kitchen3.png'),
     serviceName: 'Kitchen Remodeling',
   },
   {
     id: '3',
-    image: require('@/assets/images/kitchen.png'),
+    image: require('@/assets/images/bathroom.webp'),
     serviceName: 'Bathroom Renovation',
   },
 

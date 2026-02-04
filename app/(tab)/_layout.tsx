@@ -1,6 +1,6 @@
-import { FontAwesome } from "@expo/vector-icons";
-import { Tabs } from "expo-router";
 import React from "react";
+import { Tabs } from "expo-router";
+import { Image, StyleSheet } from "react-native";
 
 const _layout = () => {
   return (
@@ -16,7 +16,10 @@ const _layout = () => {
         options={{
           title: "Home",
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome name="home" size={size} color={color} />
+            <Image
+              source={require("@/assets/icons/home.png")}
+              style={[styles.image, { tintColor: color, width: size, height: size }]}
+            />
           ),
         }}
       />
@@ -26,8 +29,10 @@ const _layout = () => {
         options={{
           title: "Cart",
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome name="shopping-cart" size={size} color={color} />
-          ),
+            <Image
+              source={require("@/assets/icons/cart.png")}
+              style={[styles.image, { tintColor: color, width: size, height: size }]}
+            />),
         }}
       />
 
@@ -36,8 +41,10 @@ const _layout = () => {
         options={{
           title: "Account",
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome name="user" size={size} color={color} />
-          ),
+            <Image
+              source={require("@/assets/icons/account.png")}
+              style={[styles.image, { tintColor: color, width: size, height: size }]}
+            />),
         }}
       />
     </Tabs>
@@ -45,3 +52,9 @@ const _layout = () => {
 };
 
 export default _layout;
+
+const styles = StyleSheet.create({
+  image: {
+    resizeMode: "contain",
+  },
+});

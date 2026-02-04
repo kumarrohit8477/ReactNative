@@ -24,22 +24,22 @@ const SERVICES_DATA: ServiceItem[] = [
   },
   {
     id: '2',
-    image: require('@/assets/images/wm.png'),
+    image: require('@/assets/images/washingmachine.jpg'),
     serviceName: 'Washing Machine Repair',
   },
   {
     id: '3',
-    image: require('@/assets/images/refrigerator.png'),
+    image: require('@/assets/images/refrigerator.jpg'),
     serviceName: 'Refrigerator Repair',
   },
   {
     id: '4',
-    image: require('@/assets/images/microwave.png'),
+    image: require('@/assets/images/chimney.png'),
     serviceName: 'Chimney Repair',
   },
   {
     id: '5',
-    image: require('@/assets/images/microwave.png'),
+    image: require('@/assets/images/ro.png'),
     serviceName: 'RO Service & Repair',
   },
   {
@@ -49,7 +49,7 @@ const SERVICES_DATA: ServiceItem[] = [
   },
   {
     id: '7',
-    image: require('@/assets/images/microwave.png'),
+    image: require('@/assets/images/gyser.png'),
     serviceName: 'Gyser Repair',
   },
 ];

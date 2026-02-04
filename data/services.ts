@@ -18,7 +18,7 @@ export const SERVICES: Service[] = [
   {
     id: 'carpenter',
     name: 'Carpenter',
-    icon: require('@/assets/icons/caricon.png'),
+    icon: require('@/assets/icons/carpenter.png'),
     options: [
       { id: 'carpenter-repair', title: 'Repair', image: require('@/assets/images/bed.png'), route: 'ServiceDetails' },
       { id: 'carpenter-new', title: 'New Work', image: require('@/assets/images/bed1.png'), route: 'ServiceDetails' },
@@ -31,7 +31,7 @@ export const SERVICES: Service[] = [
   {
     id: 'plumber',
     name: 'Plumber',
-    icon: require('@/assets/icons/plumicon.png'),
+    icon: require('@/assets/icons/plumber.png'),
     options: [
       { id: 'plumber-leak', title: 'Leakage', image: require('@/assets/images/bed.png'), route: 'ServiceDetails' },
       { id: 'plumber-tap', title: 'Tap Fit', image: require('@/assets/images/bed.png'), route: 'ServiceDetails' },
@@ -41,7 +41,7 @@ export const SERVICES: Service[] = [
   {
     id: 'electrician',
     name: 'Electrician',
-    icon: require('@/assets/icons/elecicon.png'),
+    icon: require('@/assets/icons/electrician.png'),
     options: [
       { id: 'electrician-fan', title: 'Fan Repair', image: require('@/assets/images/bed.png'), route: 'ServiceDetails' },
       { id: 'electrician-wire', title: 'Wiring', image: require('@/assets/images/bed.png'), route: 'ServiceDetails' },
@@ -51,7 +51,7 @@ export const SERVICES: Service[] = [
   {
     id: 'cleaning',
     name: 'Cleaning ',
-    icon: require('@/assets/icons/cleaningicon.png'),
+    icon: require('@/assets/icons/cleaning.png'),
     options: [
       { id: 'kitchen', title: 'Kitchen cleaning', image: require('@/assets/images/bed.png'), route: 'ServiceDetails' },
       { id: 'bathroom', title: 'Bathroom cleaning', image: require('@/assets/images/bed.png'), route: 'ServiceDetails' },
@@ -62,7 +62,7 @@ export const SERVICES: Service[] = [
   {
     id: 'ac',
     name: 'AC Service',
-    icon: require('@/assets/icons/acicon.png'),
+    icon: require('@/assets/icons/ac.png'),
     options: [
       { id: 'ac-repair', title: 'AC Repair', image: require('@/assets/images/bed.png'), route: 'ServiceDetails' },
       { id: 'ac-install', title: 'AC Installation',image: require('@/assets/images/bed.png'), route: 'ServiceDetails' },
@@ -73,7 +73,7 @@ export const SERVICES: Service[] = [
   {
     id: 'appliance',
     name: 'Appliance Repair',
-    icon: require('@/assets/icons/caricon.png'),
+    icon: require('@/assets/icons/appliance.png'),
     options: [
       { id: 'consult-home', title: 'Home Visit', image: require('@/assets/images/bed.png'), route: 'ServiceDetails' },
       { id: 'consult-online', title: 'Online Consult', image: require('@/assets/images/bed.png'), route: 'ServiceDetails' },
@@ -82,7 +82,7 @@ export const SERVICES: Service[] = [
   {
     id: 'painting',
     name: 'Painting & Panel',
-    icon: require('@/assets/icons/caricon.png'),
+    icon: require('@/assets/icons/painter.png'),
     options: [
       { id: 'consult-home', title: 'Home Visit', image: require('@/assets/images/bed.png'), route: 'ServiceDetails' },
       { id: 'consult-online', title: 'Online Consult', image: require('@/assets/images/bed.png'), route: 'ServiceDetails' },
@@ -91,7 +91,7 @@ export const SERVICES: Service[] = [
   {
     id: 'renovation',
     name: 'Renovation',
-    icon: require('@/assets/icons/caricon.png'),
+    icon: require('@/assets/icons/renovation.png'),
     options: [
       { id: 'reno-home', title: 'Home Renovation', image: require('@/assets/images/bed.png'), route: 'ServiceDetails' },
       { id: 'reno-kitchen', title: 'Kitchen Renovation', image: require('@/assets/images/bed.png'), route: 'ServiceDetails' },
@@ -101,7 +101,7 @@ export const SERVICES: Service[] = [
   {
     id: 'consult',
     name: 'Book Consultation',
-    icon: require('@/assets/icons/caricon.png'),
+    icon: require('@/assets/icons/consultant.png'),
     options: [
       { id: 'consult-home', title: 'Home Visit', image: require('@/assets/images/bed.png'), route: 'ServiceDetails' },
       { id: 'consult-online', title: 'Book a Call', image: require('@/assets/images/bed.png'), route: 'ServiceDetails' },

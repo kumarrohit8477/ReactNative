@@ -78,8 +78,8 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
   },
   mbii: {
-    width: 100,
-    height: 60,
+    width: 90,
+    height: 50,
   },
   iconText: {
     fontSize: 12,
