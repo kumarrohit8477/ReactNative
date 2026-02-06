@@ -1,10 +1,12 @@
 import { ImageSourcePropType } from 'react-native';
 
+/* ================= TYPES ================= */
+
 export interface ServiceOption {
   id: string;
   title: string;
   image: ImageSourcePropType;
-  route: string; // expo-router path (file-based)
+  route: string; // expo-router path
 }
 
 export interface Service {
@@ -14,8 +16,10 @@ export interface Service {
   options: ServiceOption[];
 }
 
+/* ================= SERVICES DATA ================= */
+
 export const SERVICES: Service[] = [
-  /* ---------------- CARPENTER ---------------- */
+  /* ================= CARPENTER ================= */
   {
     id: 'carpenter',
     name: 'Carpenter',
@@ -23,13 +27,13 @@ export const SERVICES: Service[] = [
     options: [
       {
         id: 'repair',
-        title: 'Repair',
+        title: 'Repair Work',
         image: require('@/assets/images/bed.png'),
         route: '/service/carpenter/repair',
       },
       {
         id: 'new-work',
-        title: 'New Work',
+        title: 'New Furniture Work',
         image: require('@/assets/images/bed1.png'),
         route: '/service/carpenter/new-work',
       },
@@ -40,63 +44,123 @@ export const SERVICES: Service[] = [
         route: '/service/carpenter/installation',
       },
       {
-        id: 'drill',
+        id: 'drill-hanger',
         title: 'Hanger & Drill',
         image: require('@/assets/images/bed3.png'),
         route: '/service/carpenter/drill',
       },
       {
         id: 'curtain',
-        title: 'Curtain Install',
+        title: 'Curtain Installation',
         image: require('@/assets/images/bed4.png'),
         route: '/service/carpenter/curtain',
       },
+      {
+        id: 'consultation',
+        title: 'Book Consultation',
+        image: require('@/assets/images/bed4.png'),
+        route: '/service/carpenter/consultation',
+      },
     ],
   },
 
-  /* ---------------- PLUMBER ---------------- */
+  /* ================= PLUMBER ================= */
   {
     id: 'plumber',
-    name: 'Plumber',
+    name: 'Plumbing Services',
     icon: require('@/assets/icons/plumber.png'),
     options: [
       {
-        id: 'leakage',
-        title: 'Leakage',
-        image: require('@/assets/images/bed.png'),
-        route: '/service/plumber/leakage',
+        id: 'pipe-leakage',
+        title: 'Pipe Leakage Repair',
+        image: require('@/assets/images/bed4.png'),
+        route: '/service/plumber/pipe-repair',
       },
       {
-        id: 'tap-fit',
-        title: 'Tap Fit',
-        image: require('@/assets/images/bed.png'),
-        route: '/service/plumber/tap-fit',
+        id: 'drain-cleaning',
+        title: 'Drain Cleaning',
+        image: require('@/assets/images/bed4.png'),
+        route: '/service/plumber/drain',
+      },
+      {
+        id: 'tap-fitting',
+        title: 'Tap & Fitting Work',
+        image: require('@/assets/images/bed4.png'),
+        route: '/service/plumber/tap',
+      },
+      {
+        id: 'new-installation',
+        title: 'New Plumbing Installation',
+        image: require('@/assets/images/bed4.png'),
+        route: '/service/plumber/installation',
+      },
+      {
+        id: 'consultation',
+        title: 'Book Consultation',
+        image: require('@/assets/images/bed4.png'),
+        route: '/service/plumber/consultation',
       },
     ],
   },
 
-  /* ---------------- ELECTRICIAN ---------------- */
+  /* ================= ELECTRICIAN ================= */
   {
     id: 'electrician',
     name: 'Electrician',
     icon: require('@/assets/icons/electrician.png'),
     options: [
       {
-        id: 'fan-repair',
-        title: 'Fan Repair',
+        id: 'switch-socket',
+        title: 'Switch & Socket Work',
         image: require('@/assets/images/bed.png'),
-        route: '/service/electrician/fan-repair',
+        route: '/service/electrician/switch-socket',
+      },
+      {
+        id: 'light-installation',
+        title: 'Light & Fixture Installation',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/electrician/light-installation',
       },
       {
         id: 'wiring',
-        title: 'Wiring',
+        title: 'Wiring & Rewiring',
         image: require('@/assets/images/bed.png'),
         route: '/service/electrician/wiring',
+      },
+      {
+        id: 'mcb-fuse',
+        title: 'MCB, Fuse & DB Work',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/electrician/mcb',
+      },
+      {
+        id: 'inverter',
+        title: 'Inverter & Battery Work',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/electrician/inverter',
+      },
+      {
+        id: 'appliance',
+        title: 'Appliance Installation',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/electrician/appliance',
+      },
+      {
+        id: 'inspection',
+        title: 'Electrical Safety Inspection',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/electrician/inspection',
+      },
+      {
+        id: 'consultation',
+        title: 'Book Consultation',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/electrician/consultation',
       },
     ],
   },
 
-  /* ---------------- CLEANING ---------------- */
+  /* ================= CLEANING ================= */
   {
     id: 'cleaning',
     name: 'Cleaning',
@@ -115,10 +179,10 @@ export const SERVICES: Service[] = [
         route: '/service/cleaning/bathroom',
       },
       {
-        id: 'complete-home',
+        id: 'full-home',
         title: 'Complete Home Cleaning',
         image: require('@/assets/images/bed.png'),
-        route: '/service/cleaning/complete-home',
+        route: '/service/cleaning/full-home',
       },
       {
         id: 'water-tank',
@@ -129,7 +193,7 @@ export const SERVICES: Service[] = [
     ],
   },
 
-  /* ---------------- AC SERVICE ---------------- */
+  /* ================= AC SERVICE ================= */
   {
     id: 'ac',
     name: 'AC Service',
@@ -139,7 +203,7 @@ export const SERVICES: Service[] = [
         id: 'service',
         title: 'AC Service',
         image: require('@/assets/images/bed.png'),
-        route: '/service/ac/repair',
+        route: '/service/ac/service',
       },
       {
         id: 'repair',
@@ -153,16 +217,10 @@ export const SERVICES: Service[] = [
         image: require('@/assets/images/bed.png'),
         route: '/service/ac/installation',
       },
-      {
-        id: 'uninstallation',
-        title: 'AC Uninstallation',
-        image: require('@/assets/images/bed.png'),
-        route: '/service/ac/uninstallation',
-      },
     ],
   },
 
-  /* ---------------- RO PURIFIER ---------------- */
+  /* ================= RO PURIFIER ================= */
   {
     id: 'ro',
     name: 'RO Purifier',
@@ -170,7 +228,7 @@ export const SERVICES: Service[] = [
     options: [
       {
         id: 'installation',
-        title: 'Installation',
+        title: 'RO Installation',
         image: require('@/assets/images/bed.png'),
         route: '/service/ro/installation',
       },
@@ -180,75 +238,152 @@ export const SERVICES: Service[] = [
         image: require('@/assets/images/bed.png'),
         route: '/service/ro/service',
       },
+      {
+        id: 'repair',
+        title: 'RO Repair',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/ro/repair',
+      },
+      {
+        id: 'amc',
+        title: 'Annual Maintenance (AMC)',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/ro/amc',
+      },
     ],
   },
 
-  /* ---------------- PAINTING ---------------- */
+  /* ================= PAINTING ================= */
   {
     id: 'painting',
     name: 'Painting & Waterproofing',
     icon: require('@/assets/icons/painter.png'),
     options: [
       {
-        id: 'home-visit',
-        title: 'Home Visit',
+        id: 'interior',
+        title: 'Interior Painting',
         image: require('@/assets/images/bed.png'),
-        route: '/service/painting/home-visit',
+        route: '/service/painting/interior',
       },
       {
-        id: 'online-consult',
-        title: 'Online Consult',
+        id: 'exterior',
+        title: 'Exterior Painting',
         image: require('@/assets/images/bed.png'),
-        route: '/service/painting/online-consult',
+        route: '/service/painting/exterior',
+      },
+      {
+        id: 'wood-metal',
+        title: 'Wood & Metal Painting',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/painting/wood-metal',
+      },
+      {
+        id: 'bathroom-waterproofing',
+        title: 'Bathroom Waterproofing',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/painting/bathroom-waterproofing',
+      },
+      {
+        id: 'roof-waterproofing',
+        title: 'Roof Waterproofing',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/painting/roof-waterproofing',
+      },
+      {
+        id: 'seepage',
+        title: 'Wall Seepage Treatment',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/painting/seepage',
+      },
+      {
+        id: 'consultation',
+        title: 'Book Consultation',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/painting/consultation',
       },
     ],
   },
-
-  /* ---------------- RENOVATION ---------------- */
+  /* ================= RENOVATION ================= */
   {
     id: 'renovation',
     name: 'Renovation',
     icon: require('@/assets/icons/renovation.png'),
     options: [
       {
-        id: 'home-renovation',
+        id: 'home',
         title: 'Home Renovation',
         image: require('@/assets/images/bed.png'),
-        route: '/service/renovation/home-renovation',
+        route: '/service/renovation/home',
       },
       {
-        id: 'kitchen-renovation',
+        id: 'kitchen',
         title: 'Kitchen Renovation',
         image: require('@/assets/images/bed.png'),
-        route: '/service/renovation/kitchen-renovation',
+        route: '/service/renovation/kitchen',
       },
       {
-        id: 'bathroom-renovation',
+        id: 'bathroom',
         title: 'Bathroom Renovation',
         image: require('@/assets/images/bed.png'),
-        route: '/service/renovation/bathroom-renovation',
+        route: '/service/renovation/bathroom',
+      },
+      {
+        id: 'consultation',
+        title: 'Book Consultation',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/renovation/consultation',
       },
     ],
   },
-
-  /* ---------------- CONSULTATION ---------------- */
+  /* ================= CONSULTATION ================= */
   {
     id: 'consult',
     name: 'Book Consultation',
     icon: require('@/assets/icons/consultant.png'),
     options: [
       {
-        id: 'home-visit',
-        title: 'Home Visit',
+        id: 'consult-carpenter',
+        title: 'Carpenter Consultation',
         image: require('@/assets/images/bed.png'),
-        route: '/service/consult/home-visit',
+        route: '/service/consult/carpenter',
       },
       {
-        id: 'call',
-        title: 'Book a Call',
+        id: 'consult-plumber',
+        title: 'Plumber Consultation',
         image: require('@/assets/images/bed.png'),
-        route: '/service/consult/call',
+        route: '/service/consult/plumber',
+      },
+      {
+        id: 'consult-electrician',
+        title: 'Electrician Consultation',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/consult/electrician',
+      },
+      {
+        id: 'consult-painter',
+        title: 'Painter Consultation',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/consult/painter',
+      },
+      {
+        id: 'consult-ac',
+        title: 'AC Consultation',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/consult/ac',
+      },
+      {
+        id: 'consult-ro',
+        title: 'RO Consultation',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/consult/ro',
+      },
+      {
+        id: 'consult-renovation',
+        title: 'Renovation Consultation',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/consult/renovation',
       },
     ],
   },
+
 ];

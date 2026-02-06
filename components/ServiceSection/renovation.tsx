@@ -23,19 +23,19 @@ const SERVICES_DATA: ServiceItem[] = [
     id: '1',
     image: require('@/assets/images/homerenovation.jpeg'),
     serviceName: 'Home Renovation',
-    route: '/renovation/home',
+    route: '/service/renovation/home-renovation',
   },
   {
     id: '2',
     image: require('@/assets/images/kitchen3.png'),
     serviceName: 'Kitchen Remodeling',
-    route: '/renovation/kitchen',
+    route: '/service/renovation/kitchen-renovation',
   },
   {
     id: '3',
     image: require('@/assets/images/bathroom.webp'),
     serviceName: 'Bathroom Renovation',
-    route: '/renovation/bathroom',
+    route: '/service/renovation/bathroom-renovation',
   },
 ];
 
