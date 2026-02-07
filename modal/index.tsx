@@ -8,6 +8,7 @@ import {
   FlatList,
 } from 'react-native';
 import { router } from 'expo-router';
+import { styles } from './style';
 import { Service, ServiceOption } from '@/data/services';
 
 /* ---------- TYPES ---------- */
@@ -53,11 +54,11 @@ const IconModal: React.FC<ModalProps> = ({ service, onClose }) => {
     (option: ServiceOption) => {
       if (!option.route) return;
 
-      // Close modal first
+      // Close modal
       onClose();
 
-      // Navigate after modal closes
-      requestAnimationFrame(() => {
+      // Navigate after modal animation
+      setTimeout(() => {
         router.push({
           pathname: option.route,
           params: {
@@ -65,12 +66,10 @@ const IconModal: React.FC<ModalProps> = ({ service, onClose }) => {
             optionSelected: option.title,
           },
         });
-      });
+      }, 0);
     },
     [onClose, service.name]
   );
-
-  if (!service) return null;
 
   return (
     <View style={styles.backdrop}>
@@ -113,97 +112,5 @@ const IconModal: React.FC<ModalProps> = ({ service, onClose }) => {
 };
 
 export default memo(IconModal);
-/* ---------- STYLES ---------- */
 
-const styles = StyleSheet.create({
-  /* BACKDROP */
-  backdrop: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0,0,0,0.7)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 16,
-  },
 
-  /* MODAL CARD */
-  centeredCard: {
-    width: '100%',
-    maxWidth: 420,
-    backgroundColor: '#f2eded',
-    borderRadius: 24,
-    paddingTop: 16,
-    paddingBottom: 12,
-    paddingHorizontal: 14,
-    elevation: 16,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.25,
-    shadowRadius: 16,
-  },
-
-  /* HEADER */
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom: 16,
-  },
-
-  title: {
-    fontSize: 22,
-    fontWeight: '600',
-    color: '#3e2d2d',
-  },
-
-  closeButton: {
-    backgroundColor: '#FFFFFF',
-    padding: 8,
-    borderRadius: 20,
-    elevation: 3,
-  },
-
-  closeButtonImage: {
-    width: 14,
-    height: 14,
-    tintColor: '#333',
-  },
-
-  /* LIST */
-  listContent: {
-    paddingBottom: 16,
-  },
-
-  row: {
-    justifyContent: 'space-between',
-    marginBottom: 12,
-  },
-
-  /* OPTION CARD */
-  optionWrapper: {
-    flex: 1,
-    maxWidth: '31%',
-  },
-
-  optionTitle: {
-    fontSize: 14,
-    fontWeight: '500',
-    color: '#374151',
-    marginBottom: 4,
-  },
-
-  card: {
-    height: 85,
-    borderRadius: 16,
-    overflow: 'hidden',
-  },
-
-  cardPressed: {
-    transform: [{ scale: 0.95 }],
-  },
-
-  image: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'cover',
-  },
-});

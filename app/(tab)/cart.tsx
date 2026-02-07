@@ -1,357 +1,183 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
   StyleSheet,
-  FlatList,
-  Image,
   TouchableOpacity,
+  ScrollView,
   Alert,
-  StatusBar,
-  Platform,
 } from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
-// --- Interfaces ---
-interface CartItem {
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Ionicons } from '@expo/vector-icons';
+import { router } from 'expo-router';
+
+/* ================= TYPES ================= */
+interface Address {
   id: string;
-  name: string;
-  category: string;
-  price: number;
-  image: string;
-  quantity: number;
+  label: string;
+  details: string;
 }
-// --- Dummy Data ---
-const INITIAL_ITEMS: CartItem[] = [
+
+/* ================= DUMMY ADDRESSES ================= */
+const ADDRESSES: Address[] = [
   {
     id: '1',
-    name: 'Modern Lamp',
-    category: 'Lighting',
-    price: 45.00,
-    image: '@assets/images/bed.png',
-    quantity: 1,
+    label: 'Home',
+    details: 'Flat 203, Green Heights, Sector 12, Noida',
   },
   {
     id: '2',
-    name: 'Minimalist Chair',
-    category: 'Furniture',
-    price: 120.00,
-    image: 'https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
-    quantity: 2,
-  },
-  {
-    id: '3',
-    name: 'Wooden Desk',
-    category: 'Furniture',
-    price: 350.00,
-    image: 'https://images.unsplash.com/photo-1618220179428-22790b461013?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
-    quantity: 1,
+    label: 'Office',
+    details: '5th Floor, Tech Park, Electronic City, Bengaluru',
   },
 ];
-const Cart = () => {
-  const [cartItems, setCartItems] = useState<CartItem[]>(INITIAL_ITEMS);
-  const [totals, setTotals] = useState({ subtotal: 0, tax: 0, total: 0 });
-  // Update totals whenever cartItems change
-  useEffect(() => {
-    const subtotal = cartItems.reduce(
-      (sum, item) => sum + item.price * item.quantity,
-      0
-    );
-    const tax = subtotal * 0.05; // Assuming 5% tax
-    const total = subtotal + tax;
 
-    setTotals({
-      subtotal: parseFloat(subtotal.toFixed(2)),
-      tax: parseFloat(tax.toFixed(2)),
-      total: parseFloat(total.toFixed(2)),
-    });
-  }, [cartItems]);
-  // Handlers
-  const incrementQuantity = (id: string) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
-      )
-    );
-  };
-  const decrementQuantity = (id: string) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) => {
-        if (item.id === id) {
-          return item.quantity > 1
-            ? { ...item, quantity: item.quantity - 1 }
-            : item;
-        }
-        return item;
-      })
-    );
-  };
-  const removeItem = (id: string) => {
-    Alert.alert('Remove Item', 'Are you sure you want to remove this item?', [
-      { text: 'Cancel', style: 'cancel' },
-      {
-        text: 'Remove',
-        style: 'destructive',
-        onPress: () => setCartItems((prev) => prev.filter((i) => i.id !== id)),
-      },
-    ]);
-  };
-  // Render Single Cart Item
-  const renderItem = ({ item }: { item: CartItem }) => (
-    <View style={styles.cartItem}>
-      <Image source={{ uri: item.image }} style={styles.itemImage} />
-      
-      <View style={styles.itemDetails}>
-        <View style={styles.itemHeader}>
-            <Text style={styles.itemName} numberOfLines={1}>{item.name}</Text>
-            <TouchableOpacity onPress={() => removeItem(item.id)}>
-                <Text style={styles.removeText}>✕</Text>
-            </TouchableOpacity>
-        </View>
-        <Text style={styles.itemCategory}>{item.category}</Text>
-        <Text style={styles.itemPrice}>${item.price.toFixed(2)}</Text>
+export default function AddressConfirmationPage() {
+  const [selectedId, setSelectedId] = useState('1');
 
-        <View style={styles.quantityContainer}>
-          <TouchableOpacity 
-            style={styles.qtyButton} 
-            onPress={() => decrementQuantity(item.id)}
-          >
-            <Text style={styles.qtyButtonText}>-</Text>
-          </TouchableOpacity>
-          
-          <Text style={styles.qtyText}>{item.quantity}</Text>
-          
-          <TouchableOpacity 
-            style={styles.qtyButton} 
-            onPress={() => incrementQuantity(item.id)}
-          >
-            <Text style={styles.qtyButtonText}>+</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </View>
-  );
-
-  // If Cart is Empty
-  if (cartItems.length === 0) {
-    return (
-      <View style={styles.emptyContainer}>
-        <Text style={styles.emptyText}>Your Cart is Empty</Text>
-        <TouchableOpacity onPress={() => setCartItems(INITIAL_ITEMS)} style={styles.checkoutButton}>
-             <Text style={styles.checkoutButtonText}>Reload Demo Data</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
+  const selectedAddress = ADDRESSES.find(a => a.id === selectedId);
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>My Cart ({cartItems.length})</Text>
-      </View>
+      <Text style={styles.heading}>Confirm Address</Text>
 
-      <FlatList
-        data={cartItems}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-        contentContainerStyle={styles.listContent}
-        showsVerticalScrollIndicator={false}
-      />
+      <ScrollView>
+        {ADDRESSES.map(address => (
+          <TouchableOpacity
+            key={address.id}
+            style={[
+              styles.card,
+              selectedId === address.id && styles.activeCard,
+            ]}
+            onPress={() => setSelectedId(address.id)}
+          >
+            <View style={styles.row}>
+              <Ionicons
+                name={
+                  selectedId === address.id
+                    ? 'radio-button-on'
+                    : 'radio-button-off'
+                }
+                size={22}
+              />
+              <View style={styles.info}>
+                <Text style={styles.label}>{address.label}</Text>
+                <Text style={styles.details}>{address.details}</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+        ))}
 
-      {/* Footer Summary */}
+        {/* ADD NEW ADDRESS */}
+        <TouchableOpacity
+          style={styles.addBtn}
+          onPress={() => router.push('/addresses/add')}
+        >
+          <Ionicons name="add-circle-outline" size={22} />
+          <Text style={styles.addText}>Add New Address</Text>
+        </TouchableOpacity>
+      </ScrollView>
+
+      {/* FOOTER */}
       <View style={styles.footer}>
-        <View style={styles.summaryRow}>
-          <Text style={styles.summaryLabel}>Subtotal</Text>
-          <Text style={styles.summaryValue}>${totals.subtotal.toFixed(2)}</Text>
-        </View>
-        <View style={styles.summaryRow}>
-          <Text style={styles.summaryLabel}>Tax (5%)</Text>
-          <Text style={styles.summaryValue}>${totals.tax.toFixed(2)}</Text>
-        </View>
-        <View style={styles.divider} />
-        <View style={styles.summaryRow}>
-          <Text style={styles.totalLabel}>Total</Text>
-          <Text style={styles.totalValue}>${totals.total.toFixed(2)}</Text>
+        <View>
+          <Text style={styles.small}>Deliver to</Text>
+          <Text style={styles.bold}>
+            {selectedAddress?.label}
+          </Text>
         </View>
 
-        <TouchableOpacity style={styles.checkoutButton}>
-          <Text style={styles.checkoutButtonText}>Proceed to Checkout</Text>
+        <TouchableOpacity
+          style={styles.confirmBtn}
+          onPress={() =>
+            Alert.alert(
+              'Address Confirmed',
+              'Proceeding to payment'
+            )
+          }
+        >
+          <Text style={styles.confirmText}>Confirm & Continue</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
-};
+}
 
+/* ================= STYLES ================= */
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1a4269',
-      // The Safe Area fix for Android we discussed:
-      paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
-  },
-  header: {
-    padding: 20,
     backgroundColor: '#fff',
-    borderBottomWidth: 1,
-    borderBottomColor: '#eee',
+    padding: 16,
   },
-  headerTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#333',
+  heading: {
+    fontSize: 22,
+    fontWeight: '700',
+    marginBottom: 12,
   },
-  listContent: {
-    padding: 20,
-    paddingBottom: 100, // Space for footer
-  },
-  // Item Styles
-  cartItem: {
-    flexDirection: 'row',
-    backgroundColor: '#fff',
-    borderRadius: 16,
-    padding: 15,
-    marginBottom: 15,
-    // Shadow
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.05,
-    shadowRadius: 5,
-    elevation: 2,
-  },
-  itemImage: {
-    width: 80,
-    height: 80,
+  card: {
+    borderWidth: 1,
+    borderColor: '#eee',
     borderRadius: 12,
-    backgroundColor: '#f0f0f0',
+    padding: 14,
+    marginBottom: 12,
   },
-  itemDetails: {
-    flex: 1,
-    marginLeft: 15,
-    justifyContent: 'space-between',
+  activeCard: {
+    borderColor: '#000',
+    backgroundColor: '#f9f9f9',
   },
-  itemHeader: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'flex-start'
-  },
-  itemName: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#333',
-    flex: 1,
-    marginRight: 10,
-  },
-  removeText: {
-      fontSize: 18,
-      color: '#ff4444',
-      fontWeight: 'bold',
-      paddingLeft: 10
-  },
-  itemCategory: {
-    fontSize: 13,
-    color: '#888',
-    marginTop: 2,
-  },
-  itemPrice: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#333',
-    marginTop: 5,
-  },
-  quantityContainer: {
+  row: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 10,
-    alignSelf: 'flex-start',
-    backgroundColor: '#f5f5f5',
-    borderRadius: 8,
-    padding: 2,
   },
-  qtyButton: {
-    paddingHorizontal: 12,
-    paddingVertical: 4,
+  info: {
+    marginLeft: 12,
+    flex: 1,
   },
-  qtyButtonText: {
-    fontSize: 18,
+  label: {
+    fontSize: 16,
     fontWeight: '600',
-    color: '#333',
   },
-  qtyText: {
-    fontSize: 14,
-    fontWeight: '600',
-    marginHorizontal: 8,
-    color: '#333',
-  },
-  // Footer Styles
-  footer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: '#fff',
-    padding: 20,
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
-    // Shadow (top direction)
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: -4 },
-    shadowOpacity: 0.05,
-    shadowRadius: 10,
-    elevation: 10,
-  },
-  summaryRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 10,
-  },
-  summaryLabel: {
+  details: {
     fontSize: 14,
     color: '#666',
+    marginTop: 4,
   },
-  summaryValue: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#333',
-  },
-  divider: {
-    height: 1,
-    backgroundColor: '#eee',
-    marginVertical: 10,
-  },
-  totalLabel: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#333',
-  },
-  totalValue: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#000',
-  },
-  checkoutButton: {
-    backgroundColor: '#333',
-    paddingVertical: 16,
-    borderRadius: 16,
+  addBtn: {
+    flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 20,
+    gap: 8,
+    marginTop: 10,
   },
-  checkoutButtonText: {
+  addText: {
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  footer: {
+    borderTopWidth: 1,
+    borderColor: '#eee',
+    paddingTop: 12,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  small: {
+    fontSize: 12,
+    color: '#777',
+  },
+  bold: {
+    fontSize: 16,
+    fontWeight: '700',
+  },
+  confirmBtn: {
+    backgroundColor: '#000',
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    borderRadius: 10,
+  },
+  confirmText: {
     color: '#fff',
     fontSize: 16,
-    fontWeight: 'bold',
-  },
-  // Empty State
-  emptyContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f8f9fa',
-  },
-  emptyText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#888',
-    marginBottom: 20,
+    fontWeight: '600',
   },
 });
-
-export default Cart;

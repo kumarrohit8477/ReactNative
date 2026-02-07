@@ -1,7 +1,4 @@
 import { ImageSourcePropType } from 'react-native';
-
-/* ================= TYPES ================= */
-
 export interface ServiceOption {
   id: string;
   title: string;
@@ -15,8 +12,6 @@ export interface Service {
   icon: ImageSourcePropType;
   options: ServiceOption[];
 }
-
-/* ================= SERVICES DATA ================= */
 
 export const SERVICES: Service[] = [
   /* ================= CARPENTER ================= */
@@ -255,52 +250,23 @@ export const SERVICES: Service[] = [
 
   /* ================= PAINTING ================= */
   {
-    id: 'painting',
-    name: 'Painting & Waterproofing',
+    id: 'painting-waterproofing',
+    name: 'Painting & Water Proofing',
     icon: require('@/assets/icons/painter.png'),
     options: [
       {
-        id: 'interior',
-        title: 'Interior Painting',
+        id: 'painting',
+        title: 'Waterproofing',
         image: require('@/assets/images/bed.png'),
         route: '/service/painting/interior',
       },
       {
-        id: 'exterior',
+        id: 'waterproofing',
         title: 'Exterior Painting',
         image: require('@/assets/images/bed.png'),
         route: '/service/painting/exterior',
       },
-      {
-        id: 'wood-metal',
-        title: 'Wood & Metal Painting',
-        image: require('@/assets/images/bed.png'),
-        route: '/service/painting/wood-metal',
-      },
-      {
-        id: 'bathroom-waterproofing',
-        title: 'Bathroom Waterproofing',
-        image: require('@/assets/images/bed.png'),
-        route: '/service/painting/bathroom-waterproofing',
-      },
-      {
-        id: 'roof-waterproofing',
-        title: 'Roof Waterproofing',
-        image: require('@/assets/images/bed.png'),
-        route: '/service/painting/roof-waterproofing',
-      },
-      {
-        id: 'seepage',
-        title: 'Wall Seepage Treatment',
-        image: require('@/assets/images/bed.png'),
-        route: '/service/painting/seepage',
-      },
-      {
-        id: 'consultation',
-        title: 'Book Consultation',
-        image: require('@/assets/images/bed.png'),
-        route: '/service/painting/consultation',
-      },
+
     ],
   },
   /* ================= RENOVATION ================= */
@@ -342,48 +308,222 @@ export const SERVICES: Service[] = [
     icon: require('@/assets/icons/consultant.png'),
     options: [
       {
-        id: 'consult-carpenter',
-        title: 'Carpenter Consultation',
+        id: 'call',
+        title: 'Book Call',
         image: require('@/assets/images/bed.png'),
         route: '/service/consult/carpenter',
       },
       {
-        id: 'consult-plumber',
-        title: 'Plumber Consultation',
+        id: 'homevisit',
+        title: 'Home Visit',
         image: require('@/assets/images/bed.png'),
         route: '/service/consult/plumber',
       },
+
+    ],
+  },
+  /* ================= RENOVATION ================= */
+  {
+    id: 'mason',
+    name: 'Mason',
+    icon: require('@/assets/images/bed.png'),
+    options: [
       {
-        id: 'consult-electrician',
-        title: 'Electrician Consultation',
+        id: 'home',
+        title: 'Home Renovation',
         image: require('@/assets/images/bed.png'),
-        route: '/service/consult/electrician',
+        route: '/service/renovation/home',
       },
       {
-        id: 'consult-painter',
-        title: 'Painter Consultation',
+        id: 'kitchen',
+        title: 'Kitchen Renovation',
         image: require('@/assets/images/bed.png'),
-        route: '/service/consult/painter',
+        route: '/service/renovation/kitchen',
       },
       {
-        id: 'consult-ac',
-        title: 'AC Consultation',
+        id: 'bathroom',
+        title: 'Bathroom Renovation',
         image: require('@/assets/images/bed.png'),
-        route: '/service/consult/ac',
+        route: '/service/renovation/bathroom',
       },
       {
-        id: 'consult-ro',
-        title: 'RO Consultation',
+        id: 'consultation',
+        title: 'Book Consultation',
         image: require('@/assets/images/bed.png'),
-        route: '/service/consult/ro',
+        route: '/service/renovation/consultation',
+      },
+    ],
+  },
+  /* ================= MASON ================= */
+  {
+    id: 'mason',
+    name: 'Mason',
+    icon: require('@/assets/images/bed.png'),
+    options: [
+      {
+        id: 'brickwork',
+        title: 'Brick & Block Work',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/mason/brickwork',
       },
       {
-        id: 'consult-renovation',
-        title: 'Renovation Consultation',
+        id: 'plaster',
+        title: 'Plastering Work',
         image: require('@/assets/images/bed.png'),
-        route: '/service/consult/renovation',
+        route: '/service/mason/plaster',
+      },
+      {
+        id: 'repair',
+        title: 'Repair & Renovation',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/mason/repair',
+      },
+      {
+        id: 'concrete',
+        title: 'Concrete & RCC Work',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/mason/concrete',
+      },
+      {
+        id: 'consultation',
+        title: 'Book Consultation',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/mason/consultation',
       },
     ],
   },
 
+  /* ================= FLOORING & TILING ================= */
+  {
+    id: 'flooring-tiling',
+    name: 'Flooring & Tiling',
+    icon: require('@/assets/images/bed.png'),
+    options: [
+      {
+        id: 'floor-tiles',
+        title: 'Floor Tile Laying',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/flooring/floor-tiles',
+      },
+      {
+        id: 'wall-tiles',
+        title: 'Wall Tile Installation',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/flooring/wall-tiles',
+      },
+      {
+        id: 'marble',
+        title: 'Marble / Granite Flooring',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/flooring/marble',
+      },
+      {
+        id: 'bathroom-tiling',
+        title: 'Bathroom & Kitchen Tiling',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/flooring/bathroom',
+      },
+    ],
+  },
+
+  /* ================= ALUMINIUM WORK ================= */
+  {
+    id: 'aluminium-work',
+    name: 'Aluminium Work',
+    icon: require('@/assets/images/bed.png'),
+    options: [
+      {
+        id: 'windows',
+        title: 'Aluminium Windows',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/aluminium/windows',
+      },
+      {
+        id: 'doors',
+        title: 'Aluminium Doors',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/aluminium/doors',
+      },
+      {
+        id: 'partition',
+        title: 'Office / Home Partition',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/aluminium/partition',
+      },
+      {
+        id: 'repair',
+        title: 'Repair & Replacement',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/aluminium/repair',
+      },
+    ],
+  },
+
+  /* ================= STEEL & WELDING ================= */
+  {
+    id: 'steel-welding',
+    name: 'Steel & Welding',
+    icon: require('@/assets/images/bed.png'),
+    options: [
+      {
+        id: 'grill',
+        title: 'Window & Balcony Grill',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/welding/grill',
+      },
+      {
+        id: 'gate',
+        title: 'Gate Fabrication',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/welding/gate',
+      },
+      {
+        id: 'shed',
+        title: 'Shed & Structure Work',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/welding/shed',
+      },
+      {
+        id: 'repair',
+        title: 'Welding Repair',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/welding/repair',
+      },
+    ],
+  },
+
+  /* ================= PVC PANEL ================= */
+  {
+    id: 'pvc-panel',
+    name: 'PVC Panel',
+    icon: require('@/assets/images/bed.png'),
+    options: [
+      {
+        id: 'ceiling',
+        title: 'PVC Ceiling',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/pvc/ceiling',
+      },
+      {
+        id: 'wall',
+        title: 'PVC Wall Panel',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/pvc/wall',
+      },
+      {
+        id: 'bathroom',
+        title: 'PVC Bathroom Panel',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/pvc/bathroom',
+      },
+
+      {
+        id: 'repair',
+        title: 'Repair & Replacement',
+        image: require('@/assets/images/bed.png'),
+        route: '/service/pvc/repair',
+      },
+
+    ],
+  }
 ];
