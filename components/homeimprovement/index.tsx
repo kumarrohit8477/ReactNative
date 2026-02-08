@@ -26,7 +26,7 @@ interface ServiceItem {
 
 /* ================= GRID DATA ================= */
 
- const SERVICES: ServiceItem[] = [
+const SERVICES: ServiceItem[] = [
   {
     id: 'carpenter',
     title: 'Carpenter',
@@ -101,18 +101,28 @@ const ServicesGrid: React.FC = () => {
 
   /* ---------- HANDLERS ---------- */
 
-  const handlePress = useCallback((item: ServiceItem) => {
-    const service = SERVICES_DATA.find(
-      (s) => s.id === item.id
-    );
+const handlePress = useCallback((item: ServiceItem) => {
+  if (item.id === 'mason') {
+    router.push('/service/mason');
+    return;
+  }
 
-    if (service) {
-      setSelectedService(service);
-      setModalVisible(true);
-    } else {
-      router.push(item.route as any);
-    }
-  }, []);
+  if (item.id === 'aluminium-work') {
+    router.push('/service/aluminium');
+    return;
+  }
+
+  // 👉 Open modal for all other services
+  const service = SERVICES_DATA.find(
+    (s) => s.id === item.id
+  );
+
+  if (service) {
+    setSelectedService(service);
+    setModalVisible(true);
+  }
+}, []);
+
 
   const closeModal = useCallback(() => {
     setModalVisible(false);

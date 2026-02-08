@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Modal,
 } from 'react-native';
-
+import { router } from 'expo-router';
 import { SERVICES as SERVICES_DATA, Service } from '@/data/services';
 import IconModal from '@/modal';
 
@@ -28,7 +28,7 @@ const MIDBOX_SERVICES: ServiceItem[] = [
   { id: 'ro', title: 'RO Purifier', image: require('@/assets/icons/ro.png') },
   { id: 'painting-waterproofing', title: 'Painting & Water Proofing', image: require('@/assets/icons/painter.png') },
   { id: 'renovation', title: 'Renovation', image: require('@/assets/icons/renovation.png') },
-  { id: 'consult', title: 'Book Consultation', image: require('@/assets/icons/consultant.png') },
+  { id: 'consult', title: 'Book Consultation', image: require('@/assets/images/consult.png') },
 ];
 
 /* ================= COMPONENT ================= */
@@ -37,6 +37,18 @@ const Midbox: React.FC = () => {
   const [selectedService, setSelectedService] = useState<Service | null>(null);
 
   const openModal = (item: ServiceItem) => {
+    // 👉 Navigate for AC & RO
+    if (item.id === 'ac') {
+      router.push('/service/ac');
+      return;
+    }
+
+    if (item.id === 'ro') {
+      router.push('/service/ro');
+      return;
+    }
+
+    // 👉 Open modal for all other services
     const service = SERVICES_DATA.find(
       (s) => s.id === item.id
     );
@@ -132,14 +144,13 @@ const styles = StyleSheet.create({
     width: 56,
     height: 56,
     borderRadius: 14,
-    backgroundColor: '#f1f3f5',
     alignItems: 'center',
     justifyContent: 'center',
   },
 
   mbii: {
-    width: 34,
-    height: 34,
+    width: 45,
+    height: 45,
   },
 
   iconText: {

@@ -3,7 +3,7 @@ export interface ServiceOption {
   id: string;
   title: string;
   image: ImageSourcePropType;
-  route: string; // expo-router path
+  route: string;
 }
 
 export interface Service {
@@ -53,8 +53,8 @@ export const SERVICES: Service[] = [
       {
         id: 'consultation',
         title: 'Book Consultation',
-        image: require('@/assets/images/bed4.png'),
-        route: '/service/carpenter/consultation',
+        image: require('@/assets/images/consul.png'),
+        route: '/service/carpenter/consult',
       },
     ],
   },
@@ -311,7 +311,7 @@ export const SERVICES: Service[] = [
         id: 'call',
         title: 'Book Call',
         image: require('@/assets/images/bed.png'),
-        route: '/service/consult/carpenter',
+        route: '/service/consult/home-visit',
       },
       {
         id: 'homevisit',

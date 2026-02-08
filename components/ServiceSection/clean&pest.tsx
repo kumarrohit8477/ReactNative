@@ -27,7 +27,7 @@ const SERVICES_DATA: ServiceItem[] = [
   },
   {
     id: '2',
-    image: require('@/assets/images/bathroom.png'),
+    image: require('@/assets/images/kit.webp'),
     serviceName: 'Kitchen Cleaning',
     route: '/service/cleaning/kitchen',
   },

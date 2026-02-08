@@ -31,7 +31,7 @@ const SERVICES_DATA: ServiceItem[] = [
     id: '2',
     image: require('@/assets/images/washingmachine.jpg'),
     serviceName: 'Washing Machine Repair',
-    route: '/service/appliance/washing-machine',
+    route: '/service/appliance/washingmachine',
   },
   {
     id: '3',
