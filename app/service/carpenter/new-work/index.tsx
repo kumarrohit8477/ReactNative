@@ -81,12 +81,7 @@ export default function CarpenterServiceScreen() {
                   </View>
                   <Text style={styles.cardPrice}>Starts at ₹{item.price}</Text>
 
-                  {item.features.map((feature, idx) => (
-                    <View key={idx} style={styles.featureRow}>
-                      <View style={styles.bullet} />
-                      <Text style={styles.featureText}>{feature}</Text>
-                    </View>
-                  ))}
+                 
 
                   <Pressable style={styles.viewDetails}>
                     <Text style={styles.viewDetailsText}>View details </Text>

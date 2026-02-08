@@ -28,7 +28,7 @@ export const SERVICES: Service[] = [
       },
       {
         id: 'new-work',
-        title: 'New Furniture Work',
+        title: 'New Furniture Making',
         image: require('@/assets/images/bed1.png'),
         route: '/service/carpenter/new-work',
       },
