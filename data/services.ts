@@ -50,12 +50,6 @@ export const SERVICES: Service[] = [
         image: require('@/assets/images/bed4.png'),
         route: '/service/carpenter/curtain',
       },
-      {
-        id: 'consultation',
-        title: 'Book Consultation',
-        image: require('@/assets/images/consul.png'),
-        route: '/service/carpenter/consult',
-      },
     ],
   },
 
@@ -66,34 +60,16 @@ export const SERVICES: Service[] = [
     icon: require('@/assets/icons/plumber.png'),
     options: [
       {
-        id: 'pipe-leakage',
-        title: 'Pipe Leakage Repair',
+        id: 'plumbingservice',
+        title: 'Plumbing Service',
         image: require('@/assets/images/bed4.png'),
-        route: '/service/plumber/pipe-repair',
-      },
-      {
-        id: 'drain-cleaning',
-        title: 'Drain Cleaning',
-        image: require('@/assets/images/bed4.png'),
-        route: '/service/plumber/drain',
-      },
-      {
-        id: 'tap-fitting',
-        title: 'Tap & Fitting Work',
-        image: require('@/assets/images/bed4.png'),
-        route: '/service/plumber/tap',
+        route: '/service/plumber/installation',
       },
       {
         id: 'new-installation',
         title: 'New Plumbing Installation',
         image: require('@/assets/images/bed4.png'),
         route: '/service/plumber/installation',
-      },
-      {
-        id: 'consultation',
-        title: 'Book Consultation',
-        image: require('@/assets/images/bed4.png'),
-        route: '/service/plumber/consultation',
       },
     ],
   },
@@ -116,42 +92,6 @@ export const SERVICES: Service[] = [
         image: require('@/assets/images/bed.png'),
         route: '/service/electrician/light-installation',
       },
-      {
-        id: 'wiring',
-        title: 'Wiring & Rewiring',
-        image: require('@/assets/images/bed.png'),
-        route: '/service/electrician/wiring',
-      },
-      {
-        id: 'mcb-fuse',
-        title: 'MCB, Fuse & DB Work',
-        image: require('@/assets/images/bed.png'),
-        route: '/service/electrician/mcb',
-      },
-      {
-        id: 'inverter',
-        title: 'Inverter & Battery Work',
-        image: require('@/assets/images/bed.png'),
-        route: '/service/electrician/inverter',
-      },
-      {
-        id: 'appliance',
-        title: 'Appliance Installation',
-        image: require('@/assets/images/bed.png'),
-        route: '/service/electrician/appliance',
-      },
-      {
-        id: 'inspection',
-        title: 'Electrical Safety Inspection',
-        image: require('@/assets/images/bed.png'),
-        route: '/service/electrician/inspection',
-      },
-      {
-        id: 'consultation',
-        title: 'Book Consultation',
-        image: require('@/assets/images/bed.png'),
-        route: '/service/electrician/consultation',
-      },
     ],
   },
 
@@ -163,7 +103,7 @@ export const SERVICES: Service[] = [
     options: [
       {
         id: 'kitchen',
-        title: 'Kitchen Cleaning',
+        title: 'Kitchen \n Cleaning',
         image: require('@/assets/images/bed.png'),
         route: '/service/cleaning/kitchen',
       },
@@ -256,17 +196,16 @@ export const SERVICES: Service[] = [
     options: [
       {
         id: 'painting',
-        title: 'Waterproofing',
+        title: 'Painting',
         image: require('@/assets/images/bed.png'),
         route: '/service/painting/interior',
       },
       {
         id: 'waterproofing',
-        title: 'Exterior Painting',
+        title: 'Waterproofing',
         image: require('@/assets/images/bed.png'),
         route: '/service/painting/exterior',
       },
-
     ],
   },
   /* ================= RENOVATION ================= */
@@ -292,12 +231,6 @@ export const SERVICES: Service[] = [
         title: 'Bathroom Renovation',
         image: require('@/assets/images/bed.png'),
         route: '/service/renovation/bathroom',
-      },
-      {
-        id: 'consultation',
-        title: 'Book Consultation',
-        image: require('@/assets/images/bed.png'),
-        route: '/service/renovation/consultation',
       },
     ],
   },
@@ -400,20 +333,14 @@ export const SERVICES: Service[] = [
     icon: require('@/assets/images/bed.png'),
     options: [
       {
-        id: 'floor-tiles',
-        title: 'Floor Tile Laying',
-        image: require('@/assets/images/bed.png'),
-        route: '/service/flooring/floor-tiles',
-      },
-      {
-        id: 'wall-tiles',
-        title: 'Wall Tile Installation',
+        id: 'tiling',
+        title: 'Tiling',
         image: require('@/assets/images/bed.png'),
         route: '/service/flooring/wall-tiles',
       },
       {
         id: 'marble',
-        title: 'Marble / Granite Flooring',
+        title: 'Marble & Granite Flooring',
         image: require('@/assets/images/bed.png'),
         route: '/service/flooring/marble',
       },
@@ -433,28 +360,16 @@ export const SERVICES: Service[] = [
     icon: require('@/assets/images/bed.png'),
     options: [
       {
-        id: 'windows',
-        title: 'Aluminium Windows',
+        id: 'newwork',
+        title: 'New Work',
         image: require('@/assets/images/bed.png'),
         route: '/service/aluminium/windows',
       },
       {
-        id: 'doors',
-        title: 'Aluminium Doors',
-        image: require('@/assets/images/bed.png'),
-        route: '/service/aluminium/doors',
-      },
-      {
-        id: 'partition',
-        title: 'Office / Home Partition',
-        image: require('@/assets/images/bed.png'),
-        route: '/service/aluminium/partition',
-      },
-      {
-        id: 'repair',
+        id: 'repairnreplacement',
         title: 'Repair & Replacement',
         image: require('@/assets/images/bed.png'),
-        route: '/service/aluminium/repair',
+        route: '/service/aluminium/doors',
       },
     ],
   },
@@ -499,31 +414,17 @@ export const SERVICES: Service[] = [
     icon: require('@/assets/images/bed.png'),
     options: [
       {
-        id: 'ceiling',
-        title: 'PVC Ceiling',
+        id: 'external',
+        title: 'Exterior Panel',
         image: require('@/assets/images/bed.png'),
         route: '/service/pvc/ceiling',
       },
       {
-        id: 'wall',
-        title: 'PVC Wall Panel',
+        id: 'interior',
+        title: 'Interior Panel',
         image: require('@/assets/images/bed.png'),
         route: '/service/pvc/wall',
       },
-      {
-        id: 'bathroom',
-        title: 'PVC Bathroom Panel',
-        image: require('@/assets/images/bed.png'),
-        route: '/service/pvc/bathroom',
-      },
-
-      {
-        id: 'repair',
-        title: 'Repair & Replacement',
-        image: require('@/assets/images/bed.png'),
-        route: '/service/pvc/repair',
-      },
-
     ],
   }
 ];

@@ -30,7 +30,6 @@ const MIDBOX_SERVICES: ServiceItem[] = [
   { id: 'renovation', title: 'Renovation', image: require('@/assets/icons/renovation.png') },
   { id: 'consult', title: 'Book Consultation', image: require('@/assets/images/consult.png') },
 ];
-
 /* ================= COMPONENT ================= */
 const Midbox: React.FC = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -39,12 +38,12 @@ const Midbox: React.FC = () => {
   const openModal = (item: ServiceItem) => {
     // 👉 Navigate for AC & RO
     if (item.id === 'ac') {
-      router.push('/service/ac');
+      router.push('/service/appliance/ac');
       return;
     }
 
     if (item.id === 'ro') {
-      router.push('/service/ro');
+      router.push('/service/appliance/ro');
       return;
     }
 

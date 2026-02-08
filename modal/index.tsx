@@ -28,10 +28,7 @@ interface OptionCardProps {
 const OptionCard = memo(({ option, onPress }: OptionCardProps) => {
   return (
     <View style={styles.optionWrapper}>
-      <Text style={styles.optionTitle} numberOfLines={1}>
-        {option.title}
-      </Text>
-
+     
       <Pressable
         onPress={() => onPress(option)}
         style={({ pressed }) => [
@@ -41,6 +38,13 @@ const OptionCard = memo(({ option, onPress }: OptionCardProps) => {
       >
         <Image source={option.image} style={styles.image} />
       </Pressable>
+       <Text
+        style={styles.optionTitle}
+        numberOfLines={2}          // max 2 lines
+        ellipsizeMode="tail"
+      >
+        {option.title}
+      </Text>
     </View>
   );
 });
@@ -85,7 +89,6 @@ const IconModal: React.FC<ModalProps> = ({ service, onClose }) => {
         {/* Header */}
         <View style={styles.header}>
           <Text style={styles.title}>{service.name}</Text>
-
           <Pressable onPress={onClose} hitSlop={15} style={styles.closeButton}>
             <Image
               source={require('@/assets/icons/back.png')}

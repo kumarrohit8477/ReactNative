@@ -106,12 +106,6 @@ const handlePress = useCallback((item: ServiceItem) => {
     router.push('/service/mason');
     return;
   }
-
-  if (item.id === 'aluminium-work') {
-    router.push('/service/aluminium');
-    return;
-  }
-
   // 👉 Open modal for all other services
   const service = SERVICES_DATA.find(
     (s) => s.id === item.id
